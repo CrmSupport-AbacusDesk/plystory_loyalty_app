@@ -58,19 +58,27 @@ export class HomePage {
     offer_detail: any = {};
     language: any = [];
     upload_url: any = '';
+    upload_url2: any = '';
+
     user_type: any;
     idlogin: any;
     registration: any;
     notifications: any = '';
     status: string;
+    assistant_detail: any;
+ 
 
 
 
     constructor(public navCtrl: NavController, public app: App, public service: DbserviceProvider, public loadingCtrl: LoadingController, public storage: Storage, private barcodeScanner: BarcodeScanner, public alertCtrl: AlertController, public modalCtrl: ModalController, private push: Push, public translate: TranslateService, public constant: ConstantProvider, public socialSharing: SocialSharing) {
+        this.getNewBanner_detail();
         this.presentLoading();
 
         this.initPushNotification();
         this.upload_url = constant.upload_url;
+        this.upload_url2 = constant.upload_url2;
+
+      
         // this.getData();
     }
     ionViewWillEnter() {
@@ -80,13 +88,16 @@ export class HomePage {
         this.translate.setDefaultLang(this.lang);
         this.translate.use(this.lang);
         this.getData();
+        this.getNewBanner_detail();
         this.get_user_lang();
         this.getofferBannerList();
+        // this.getAssis_detail();
     }
 
     doRefresh(refresher) {
         console.log('Begin async operation', refresher);
         this.getData();
+        this.getNewBanner_detail();
         refresher.complete();
     }
     RequiredAlert1(text)
@@ -116,6 +127,7 @@ export class HomePage {
                 this.language = r['language'];
                 this.karigar_detail = r['karigar'];
                 this.appbanner = r['appbanner'];
+       
                 console.log(this.appbanner);
 
                 console.log(this.karigar_detail.status);
@@ -495,6 +507,30 @@ export class HomePage {
     }
 
 
+
+
+
+
+    home_banner: any = [];
+    getNewBanner_detail(){
+    
+    
+       
+ 
+        this.service.post_rqst({},'app_karigar/get_app_banner')
+        .subscribe( (r) =>
+        {
+            console.log("assiantace mechanic detail=====>",r);
+            this.home_banner =r['banner'];
+            console.log(this.home_banner);
+        });
+    }
+
+
+
+
+
+
     title: any = ""
     no: any = ""
     yes: any = ""
@@ -671,4 +707,9 @@ export class HomePage {
 function subTitle(arg0: string) {
     throw new Error('Function not implemented.');
 }
+
+
+
+
+
 

@@ -144,12 +144,12 @@
                 </div>
                 <p>{{'Offers' | translate}}</p>
             </li>
-            <li (click)="goOnGiftGallary()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
+            <!-- <li (click)="goOnGiftGallary()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
                 <div class="img-view">
                     <img src="assets/imgs/home-icon/gift.svg">
                 </div>
                 <p>{{'Gift Gallery' | translate}}</p>
-            </li>
+            </li> -->
             <!-- goOnGiftListPage -->
             <li (click)="goRedeemType()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
                 <div class="img-view">
@@ -248,6 +248,25 @@
                     </ion-item>
                 </ion-list>
             </div> 
+        </div> -->
+    </div>
+
+
+
+
+
+     <div class="slide-image sldr_img app_bnr_bg">
+        <ion-slides *ngIf="home_banner.length && home_banner.length>1 " slidesPerView="3" [initialSlide]="0" pager autoplay="1000" speed="1000" loop="true">
+            <ion-slide *ngFor="let row of home_banner">
+                <img [src]="upload_url2+row.banner_name">
+              
+            </ion-slide>
+        </ion-slides>
+        <!-- <div *ngIf="appbanner.length==1">
+            <img [src]="uploadUrl+appbanner[0].banner">
+        </div>
+        <div *ngIf="appbanner.length==0">
+            <img src="../../assets/imgs/appbanner.png">
         </div> -->
     </div>
     
