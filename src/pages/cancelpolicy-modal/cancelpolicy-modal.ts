@@ -128,6 +128,13 @@ export class CancelpolicyModalPage {
             {
                 this.showAlert(" Already Redeemed!");
             }
+
+            else if(r['status']=="LOWBALANCE")
+            {
+                this.showAlert("Insufficient Balance!");
+            }
+
+
         });
     }
     showAlert(text) {
