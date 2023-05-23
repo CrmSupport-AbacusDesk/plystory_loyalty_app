@@ -73,7 +73,7 @@
         </div>
     </div>
     
-    <div class="home-grid" [ngClass]="{'list-view': active}">
+    <div class="home-grid hm_alg" [ngClass]="{'list-view': active}">
         <div class="count-info" *ngIf="karigar_detail.user_type!=3">
             <div class="left-count">
                 <p>{{'LAST 7 DAYS' | translate}}</p>
@@ -89,20 +89,20 @@
         <ul>
             <li (click)="viewProfie()">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/profile.png">
+                    <img src="assets/imgs/home-icon/ply_profile.png">
                 </div>
                 <p>{{'My Profile' | translate}}</p>
             </li>
             <li (click)="scanCoupon()" *ngIf="karigar_detail.user_type == 1 && karigar_detail.status =='Verified' ">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/scane.svg">
+                    <img src="assets/imgs/home-icon/ply_scn.png">
                 </div>
                 <p>{{'Scan' | translate}}</p>
             </li>
             
             <li (click)="goOnPointeListPage()" *ngIf="karigar_detail.user_type == 1 && karigar_detail.status =='Verified'">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/payment.svg">
+                    <img src="assets/imgs/home-icon/ply_sc_hs.png">
                 </div>
                 <p>{{'Scan History' | translate}}</p>
             </li>
@@ -115,13 +115,13 @@
             </li>
             <li (click)="gotoChangeLang()">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/language_icon.svg">
+                    <img src="assets/imgs/home-icon/ply_lan.png">
                 </div>
                 <p>{{'Change Language' | translate}}</p>
             </li>
             <li (click)="goOnDigitalcatPage()" >
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/pdf.svg">
+                    <img src="assets/imgs/home-icon/ply_pdf.png">
                 </div>
                 <p>{{'Pdf Catalogues' | translate}}</p>
             </li>
@@ -140,20 +140,20 @@
             </li> -->
             <li (click)="goOnOffersListPage()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/offer.svg">
+                    <img src="assets/imgs/home-icon/ply_ofr.png">
                 </div>
                 <p>{{'Offers' | translate}}</p>
             </li>
-            <li (click)="goOnGiftGallary()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
+            <!-- <li (click)="goOnGiftGallary()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
                 <div class="img-view">
                     <img src="assets/imgs/home-icon/gift.svg">
                 </div>
                 <p>{{'Gift Gallery' | translate}}</p>
-            </li>
+            </li> -->
             <!-- goOnGiftListPage -->
             <li (click)="goRedeemType()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/wallet.svg">
+                    <img src="assets/imgs/home-icon/ply_rdm.png">
                 </div>
                 <p>{{'Redeem My Points' | translate}}</p>
             </li>
@@ -171,7 +171,7 @@
             
             <li (click)="gotoHistory()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/history.svg">
+                    <img src="assets/imgs/home-icon/ply_trakr.png">
                 </div>
                 <p>{{'Gift Tracker' | translate}}</p>
             </li>
@@ -179,8 +179,8 @@
           
             <li (click)="share()" *ngIf="karigar_detail.user_type!=3">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/gift-new.svg">
-                    <span class="custom-point">{{sharepoint}}</span>
+                    <img src="assets/imgs/home-icon/ply_share.png">
+                    <!-- <span class="custom-point">{{sharepoint}}</span> -->
                 </div>
                 <p>{{'Share App' | translate}}</p>
             </li>
@@ -193,14 +193,14 @@
            
             <li (click)="goOnFeedbackPage()" *ngIf="karigar_detail.user_type!=3">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/chat.png">
+                    <img src="assets/imgs/home-icon/ply_cht.png">
                     <span class="chat-count" *ngIf="feedback_count">{{feedback_count}}</span>
                 </div>
                 <p>{{'Chat with us' | translate}}</p>
             </li>
             <li (click)="goOnVideoPage()">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/video-call.svg">
+                    <img src="assets/imgs/home-icon/ply_vds.png">
                 </div>
                 <p>{{'Videos' | translate}}</p>
             </li>
@@ -218,20 +218,20 @@
             </li> -->
             <li (click)="goOnfaqPage()">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/faq.svg">
+                    <img src="assets/imgs/home-icon/ply_faq.png">
                 </div>
                 <p>{{'FAQ' | translate}}</p>
             </li>
             <li (click)="goOnAdvanceTextPage()">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/company.svg">
+                    <img src="assets/imgs/home-icon/ply_abt.png">
                 </div>
                 <p>{{'About Us' | translate}}</p>
             </li>
             
             <li (click)="goOnContactPage()">
                 <div class="img-view">
-                    <img src="assets/imgs/home-icon/contact.svg">
+                    <img src="assets/imgs/home-icon/ply_cnt.png">
                 </div>
                 <p>{{'Contact Us' | translate}}</p>
             </li>
@@ -248,6 +248,25 @@
                     </ion-item>
                 </ion-list>
             </div> 
+        </div> -->
+    </div>
+
+
+
+
+
+     <div class="slide-image sldr_img app_bnr_bg">
+        <ion-slides *ngIf="home_banner.length && home_banner.length>1 " slidesPerView="3" [initialSlide]="0" pager autoplay="1000" speed="1000" loop="true">
+            <ion-slide *ngFor="let row of home_banner">
+                <img [src]="upload_url2+row.banner_name">
+              
+            </ion-slide>
+        </ion-slides>
+        <!-- <div *ngIf="appbanner.length==1">
+            <img [src]="uploadUrl+appbanner[0].banner">
+        </div>
+        <div *ngIf="appbanner.length==0">
+            <img src="../../assets/imgs/appbanner.png">
         </div> -->
     </div>
     
