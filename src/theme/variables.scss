@@ -5327,6 +5327,8 @@ button.grid-indication {
 
 .sldr_img img {
     padding-top: 6px;
+    width: 47px;
+    height: 47px;
 }
 
 .abt_img img {
@@ -5345,6 +5347,12 @@ button.grid-indication {
     bottom: 0;
     background: #ffffff;
 }
+.sl_img img {
+    height: 160px !important;
+    object-fit: cover;
+}
+
+
 
 
 

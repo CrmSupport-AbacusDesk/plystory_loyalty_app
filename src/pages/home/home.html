@@ -28,7 +28,7 @@
     </ion-refresher>
   
 
-    <div class="slide-image sldr_img">
+    <div class="slide-image sl_img">
         <ion-slides *ngIf="appbanner.length && appbanner.length>1 " [initialSlide]="0" pager autoplay="1000" speed="1000" loop="true">
             <ion-slide *ngFor="let row of appbanner">
                 <img [src]="uploadUrl+row.banner">
@@ -256,7 +256,7 @@
 
 
      <div class="slide-image sldr_img app_bnr_bg">
-        <ion-slides *ngIf="home_banner.length && home_banner.length>1 " slidesPerView="3" [initialSlide]="0" pager autoplay="1000" speed="1000" loop="true">
+        <ion-slides *ngIf="home_banner.length && home_banner.length>1 " slidesPerView="5" [initialSlide]="0" pager autoplay="1000" speed="1000" loop="true">
             <ion-slide *ngFor="let row of home_banner">
                 <img [src]="upload_url2+row.banner_name">
               
