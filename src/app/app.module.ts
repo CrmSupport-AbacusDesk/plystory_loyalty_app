@@ -11,7 +11,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { OtpPage } from '../pages/login-section/otp/otp';
 import { RegistrationPage } from '../pages/login-section/registration/registration';
 import { LoginScreenPage } from '../pages/login-section/login-screen/login-screen';
-
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -191,6 +192,8 @@ export function createTranslateLoader(http: HttpClient) {
         DeviceOrientation,
         AppVersion,
         SocialSharing,
+        LocationAccuracy,
+        Geolocation,
         FileTransferObject,
         File,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
