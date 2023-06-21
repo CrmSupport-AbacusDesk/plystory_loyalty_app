@@ -37,6 +37,8 @@ import { LanguagePage } from '../language/language';
 import { ArrivalProductPage } from '../arrival-product/arrival-product';
 import { OfferProductPage } from '../offer-product/offer-product';
 import { ContractorListPage } from '../contractor/contractor-list/contractor-list';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { Geolocation } from '@ionic-native/geolocation';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -70,7 +72,7 @@ export class HomePage {
 
 
 
-    constructor(public navCtrl: NavController, public app: App, public service: DbserviceProvider, public loadingCtrl: LoadingController, public storage: Storage, private barcodeScanner: BarcodeScanner, public alertCtrl: AlertController, public modalCtrl: ModalController, private push: Push, public translate: TranslateService, public constant: ConstantProvider, public socialSharing: SocialSharing) {
+    constructor(public navCtrl: NavController, public app: App, public service: DbserviceProvider, public loadingCtrl: LoadingController, public storage: Storage, private barcodeScanner: BarcodeScanner, public alertCtrl: AlertController, public modalCtrl: ModalController, private push: Push, public translate: TranslateService, public constant: ConstantProvider, public socialSharing: SocialSharing,public locationAccuracy: LocationAccuracy, public geolocation: Geolocation) {
         this.getNewBanner_detail();
         this.presentLoading();
 
@@ -158,6 +160,8 @@ export class HomePage {
     }
 
 
+lat:any;
+long:any;
     getofferBannerList() {
         console.log(this.service.karigar_id);
         console.log('offerbanner');
@@ -221,6 +225,38 @@ export class HomePage {
 
 
     scan() {
+
+        this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY)
+        .then(() => {
+            let options = {
+                maximumAge: 10000, timeout: 15000, enableHighAccuracy:true
+            };
+            this.geolocation.getCurrentPosition(options)
+            .then((resp) => {
+                this.lat = resp.coords.latitude
+                this.long = resp.coords.longitude
+                console.log(this.lat + 'lat');
+                console.log(this.lat + 'long');
+    
+                
+                if(this.lat == null && this.long == null){
+                    console.log("null lat",this.lat);
+                }  
+            },
+            error => {
+                console.log('Error requesting location permissions', error);
+                if(error){
+                    let alert = this.alertCtrl.create({
+                        title:'Alert!',
+                        cssClass:'action-close',
+                        subTitle:"Enable to get your location so, can't scan",
+                        buttons: ['OK']
+                    });
+                    alert.present();  
+                }
+                
+            });
+        });
         if (this.karigar_detail.manual_permission == 1) {
             this.navCtrl.push(CoupanCodePage)
         }
@@ -243,7 +279,7 @@ export class HomePage {
                             this.qr_code = resp.text;
                             console.log(this.qr_code);
                             if (resp.text != '') {
-                                this.service.post_rqst({ 'karigar_id': this.service.karigar_id, 'qr_code': this.qr_code }, 'app_karigar/karigarCoupon')
+                                this.service.post_rqst({ 'karigar_id': this.service.karigar_id, 'qr_code': this.qr_code ,'coupon_lat':this.lat,'coupon_long':this.long}, 'app_karigar/karigarCoupon')
                                     .subscribe((r: any) => {
                                         console.log(r);
 
