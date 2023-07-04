@@ -5,6 +5,40 @@
 </ion-header>
 
 <ion-content>
+
+   
+
+
+    <div class="ion-tab-btn" style="padding-top: 20px;">
+        <ion-segment [(ngModel)]="language" >
+          
+          <ion-segment-button  value="Eng" (click)="get_question(language)">
+            <span>{{ 'ENGLISH' | translate }}</span>
+          </ion-segment-button>
+          
+          <ion-segment-button  value="Hin" (click)="get_question(language)">
+            <span>{{ 'HINDI' | translate }}</span>
+          </ion-segment-button>
+
+          <ion-segment-button  value="Ben" (click)="get_question(language)">
+            <span>{{ 'BENGALI' | translate }}</span>
+          </ion-segment-button>
+
+          <ion-segment-button  value="Asm" (click)="get_question(language)">
+            <span>{{ 'ASSAMESE' | translate }}</span>
+          </ion-segment-button>
+
+        </ion-segment>
+
+
+        
+      </div>
+
+
+
+
+
+
     <div class="image-detail" *ngIf="question_list.length == 0">
         <img src="assets/imgs/no_found.svg">
     </div>

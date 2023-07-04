@@ -14,18 +14,36 @@ import * as jwt_decode from "jwt-decode";
 export class FaqPage {
     tokenInfo:any={};
     lang:any='';
+
+   
+    filter:any = {};
+
+  language :string  ="Eng";
+
+    
+
+
     constructor(public navCtrl: NavController, public navParams: NavParams,public db:DbserviceProvider,public storage:Storage,public translate:TranslateService) {
+
+        this.filter.language = 'Eng';
+
     }
     
     ionViewDidLoad() {
         this.get_user_lang();
-        this.get_question();    
+        this.get_question('Eng'); 
+        
+        // this.mode='1';
     }
     
     question_list:any=[];
-    get_question()
+    get_question(language)
     {
-        this.db.post_rqst("","app_karigar/getQuestions")
+       
+        this.filter.language = language;
+        console.log( this.filter.language);
+
+        this.db.post_rqst({'filter':this.filter},"app_karigar/getQuestions")
         .subscribe(resp=>{
             console.log(resp);
             this.question_list = resp['question_list'];
