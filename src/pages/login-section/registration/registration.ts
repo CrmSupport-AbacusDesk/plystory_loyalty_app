@@ -185,11 +185,7 @@ export class RegistrationPage {
         
         submit()
         {
-            console.log('data');
-            console.log(this.data);
-            if(!this.data.whatsapp_mobile_no){
-                this.data.whatsapp_mobile_no="";
-            }
+          
             
             
             

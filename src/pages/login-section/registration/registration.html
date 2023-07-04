@@ -54,8 +54,8 @@
                         </ion-item>
                         <ion-item class="cs-input" [ngClass]="{'error':f.submitted && last_name?.invalid}">
                             <ion-label floating>{{'Last Name' | translate}}*</ion-label>
-                            <ion-input type="text" name="last_name" #last_name="ngModel" [(ngModel)]="data.last_name" (ngModelChange)="(data.last_name!=null)?data.last_name[0] = data.last_name[0].toUpperCase():''" (keypress)="namecheck($event)" required [ngClass]="{'error':f.submitted && last_name?.invalid}"
-                            maxlength="10"></ion-input>
+                            <ion-input type="text" name="last_name" #last_name="ngModel" [(ngModel)]="data.last_name" (ngModelChange)="(data.last_name!=null)?data.last_name[0] = data.last_name[0].toUpperCase():''" (keypress)="namecheck($event)" required 
+                          ></ion-input>
                         </ion-item>
                     </ion-list>
                 </div>
@@ -164,7 +164,7 @@
                 <ion-item class="cs-select" [ngClass]="{'error':f.submitted && document_type?.invalid}">
                     <ion-label>{{'Select Document' | translate}}</ion-label>
                     <ion-select name="document_type" [(ngModel)]="data.document_type" #document_type="ngModel">
-                        <ion-option value="AadharCard">{{'Aadhar Card' | translate}}</ion-option>
+                        <ion-option value="AadhaarCard">{{'Aadhaar Card' | translate}}</ion-option>
                       
                         <ion-option value="VoterCard">{{'Voter Card' | translate}}</ion-option>
 
@@ -182,7 +182,7 @@
 
                 </div>
                 
-                <div class="upload-document" (click)="onUploadChangeback()" *ngIf="data.document_type == 'AadharCard'">
+                <div class="upload-document" (click)="onUploadChangeback()" *ngIf="data.document_type == 'AadhaarCard'">
                     <p *ngIf="!data.document_image_back"><i class="material-icons">add_circle</i><br>{{'Upload Document Back'}}</p>
                     <!-- <img *ngIf="data.document_image_back != ''" [src]="data.document_image_back" alt="" required> -->
 
@@ -190,8 +190,8 @@
 
                 </div>
 
-                <ion-item class="cs-input mb0 mt10" *ngIf="data.document_type=='AadharCard'" [ngClass]="{'error':f.submitted && document_no?.invalid}">
-                    <ion-label floating>{{'AadharCard' | translate}}*</ion-label>
+                <ion-item class="cs-input mb0 mt10" *ngIf="data.document_type=='AadhaarCard'" [ngClass]="{'error':f.submitted && document_no?.invalid}">
+                    <ion-label floating>{{'Aadhaar Card' | translate}}*</ion-label>
                     <ion-input type="tel" name="document_no" #document_no="ngModel" [(ngModel)]="data.document_no" maxlength="12" minlength="12" required></ion-input>
                 </ion-item>
                 
@@ -255,6 +255,52 @@
             </div>
         </div>
     </ng-container>
+
+
+    <ng-container>
+        <div class="heading line" >
+            <p >{{'Bank Information' | translate}}</p>
+        </div>
+        
+        <div class="ragistration-fields">
+            <div class="cs-form">
+                <ion-list>
+            <ion-item class="cs-input mb0 mt10">
+                <ion-label floating>{{'Account Holder Name' | translate}}</ion-label>
+                <ion-input type="text" name="account_holder_name" ng-pattern-restrict
+                    #account_holder_name="ngModel"
+                    [(ngModel)]="data.account_holder_name "></ion-input>
+            </ion-item>
+
+            <ion-item class="cs-input mb0 mt10">
+                <ion-label floating>{{'Bank Name' | translate}}</ion-label>
+                <ion-input type="text" name="bank_name " pattern="[\x00-\x7F]+"
+                    ng-pattern-restrict #bank_name="ngModel"
+                    [(ngModel)]="data.bank_name "></ion-input>
+            </ion-item>
+
+
+            <ion-item class="cs-input mb0 mt10">
+                <ion-label floating>{{'Account No.' | translate}}</ion-label>
+                <ion-input type="tel" name="account_no " #account_no="ngModel"
+                    [(ngModel)]="data.account_no" minlength="8" maxlength="16"></ion-input>
+            </ion-item>
+
+            <ion-item class="cs-input mb0 mt10">
+                <ion-label floating>{{'IFSC Code' | translate}}</ion-label>
+                <ion-input type="text" name="ifsc_code " #ifsc_code="ngModel"
+                    [(ngModel)]="data.ifsc_code" pattern="^[A-z]{4}[0][A-z0-9]{6}$" maxlength="11" minlength="11"></ion-input>
+            </ion-item>
+            <p class="error" *ngIf="ifsc_code.errors?.pattern">{{'Invaild IFSC Code' |
+                translate}}</p>
+
+          
+        </ion-list>
+    </div>
+</div>
+
+    </ng-container>
+    
     
     
     <div class="heading line" *ngIf="!data.id">

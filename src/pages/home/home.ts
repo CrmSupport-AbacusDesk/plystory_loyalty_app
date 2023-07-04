@@ -154,7 +154,7 @@ export class HomePage {
                     this.sharepoint = r['points']['owner_ref_point'];
 
 
-                    this.notification();
+                    // this.notification();
                 }
             });
     }
@@ -465,49 +465,49 @@ long:any;
         alert.present();
     }
 
-    notification() {
-        console.log("notification called");
+    // notification() {
+    //     console.log("notification called");
 
-        this.push.hasPermission()
-            .then((res: any) => {
+    //     this.push.hasPermission()
+    //         .then((res: any) => {
 
-                if (res.isEnabled) {
-                    console.log('We have permission to send push notifications');
-                } else {
-                    console.log('We do not have permission to send push notifications');
-                }
-            });
+    //             if (res.isEnabled) {
+    //                 console.log('We have permission to send push notifications');
+    //             } else {
+    //                 console.log('We do not have permission to send push notifications');
+    //             }
+    //         });
 
 
-        const options: PushOptions = {
-            android: {
-                senderID: '792125577232',
-            },
-            ios: {
-                alert: 'true',
-                badge: true,
-                sound: 'true'
-            },
-            windows: {
+    //     const options: PushOptions = {
+    //         android: {
+    //             senderID: '792125577232',
+    //         },
+    //         ios: {
+    //             alert: 'true',
+    //             badge: true,
+    //             sound: 'true'
+    //         },
+    //         windows: {
 
-            },
-        };
+    //         },
+    //     };
 
-        const pushObject: PushObject = this.push.init(options);
+    //     const pushObject: PushObject = this.push.init(options);
 
-        pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
-        pushObject.on('registration').subscribe((registration: any) => {
-            console.log('Device registered', registration)
-            this.service.post_rqst({ 'id': this.service.karigar_id, 'registration_id': registration.registrationId }, 'app_karigar/update_token').subscribe((r) => {
-                console.log(r);
-                console.log("tokken saved");
+    //     pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+    //     pushObject.on('registration').subscribe((registration: any) => {
+    //         console.log('Device registered', registration)
+    //         this.service.post_rqst({ 'id': this.service.karigar_id, 'registration_id': registration.registrationId }, 'app_karigar/update_token').subscribe((r) => {
+    //             console.log(r);
+    //             console.log("tokken saved");
 
-            });
-        }
-        );
+    //         });
+    //     }
+    //     );
 
-        pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-    }
+    //     pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+    // }
 
     openModal() {
         let contactModal = this.modalCtrl.create(AboutusModalPage);
