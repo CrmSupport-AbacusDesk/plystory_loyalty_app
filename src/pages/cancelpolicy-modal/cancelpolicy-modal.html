@@ -52,6 +52,10 @@
                         <ion-label><img src="assets/imgs/googlepay.png">{{'Google Pay' | translate }}</ion-label>
                         <ion-radio value="Google Pay"></ion-radio>
                     </ion-item>
+                    <ion-item>
+                        <ion-label><img src="assets/imgs/bank_history.png">{{'Bank Transfer' | translate }}</ion-label>
+                        <ion-radio value="Bank Transfer"></ion-radio>
+                    </ion-item>
                     
                     <ion-item *ngIf="redeemType == 'gift'">
                         <ion-label><img src="assets/imgs/home-icon/gift.svg">{{'Gift' | translate}}</ion-label>
@@ -78,6 +82,72 @@
                         </div>
                     </div>
                 </ng-container>
+
+                <ng-container
+                *ngIf="data.payment_type == 'Bank Transfer'">
+
+                <h1> {{'Bank Information' | translate}} </h1>
+                  <div class="check-bx" *ngIf="karigar_detail.bank_name && karigar_detail.account_holder_name && karigar_detail.account_no && karigar_detail.ifsc_code">
+                    <ion-item>
+                        <ion-checkbox color="secondary" checked="true" name="check1" #check1="ngModel"
+                            [(ngModel)]="data.check1" (click)="bankDetail()">
+                        </ion-checkbox>
+                    </ion-item>
+                    <p>{{'Same as given on profile' | translate}}</p>
+                </div>
+                <div class="input-section">
+
+                    <div class="cs-form">
+                        <ion-list>
+                            <ion-item class="cs-input mb0 mt10">
+                                <ion-label floating>{{'Account Holder Name' | translate}}*</ion-label>
+                                <ion-input type="text" name="account_holder_name" ng-pattern-restrict
+                                    #account_holder_name="ngModel"
+                                    [(ngModel)]="data.account_holder_name " required></ion-input>
+                            </ion-item>
+
+                            <ion-item class="cs-input mb0 mt10">
+                                <ion-label floating>{{'Bank Name' | translate}}*</ion-label>
+                                <ion-input type="text" name="bank_name " pattern="[\x00-\x7F]+"
+                                    ng-pattern-restrict #bank_name="ngModel"
+                                    [(ngModel)]="data.bank_name " required></ion-input>
+                            </ion-item>
+
+
+                            <ion-item class="cs-input mb0 mt10">
+                                <ion-label floating>{{'Account No.' | translate}}*</ion-label>
+                                <ion-input type="tel" name="account_no " #account_no="ngModel"
+                                    [(ngModel)]="data.account_no" minlength="8" maxlength="16" required></ion-input>
+                            </ion-item>
+
+                            <ion-item class="cs-input mb0 mt10">
+                                <ion-label floating>{{'IFSC Code' | translate}}*</ion-label>
+                                <ion-input type="text" name="ifsc_code " #ifsc_code="ngModel"
+                                    [(ngModel)]="data.ifsc_code" pattern="^[A-z]{4}[0][A-z0-9]{6}$" maxlength="11" minlength="11" required></ion-input>
+                            </ion-item>
+                            <p class="error" *ngIf="ifsc_code.errors?.pattern">{{'Invaild IFSC Code' |
+                                translate}}</p>
+
+
+                        </ion-list>
+                    </div>
+                </div>
+                <!-- <ng-container *ngIf="data.account_holder_name == '' || data.bank_name=='' || data.account_no=='' || data.ifsc_code==''">
+                    <h1>{{'Bank Information' | translate}}</h1>
+                    <div class="alert-card">
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>{{'Sorry you can not send redeem request. Bank details are missing Please update your bank detail' | translate}}</p>
+                                    <a ion-button small (click)="goRegestrationsPage()">{{'Update detail' | translate}}</a>
+                                </td>
+                            </tr>
+                          
+                        </table>
+                    </div>
+                </ng-container> -->
+
+            </ng-container>
 
             </ng-container>
                 <ng-container *ngIf="redeemType == 'gift'">
@@ -107,7 +177,8 @@
                 </div>
                 <div class="footer-btn">
                     <a class="outline-btn" (click)="dismiss()">{{'No' | translate}}</a>
-                    <button class="fill-btn" [disabled]="!data.check ||!data.otp ||!otp_value || payment_number == '' || karigar_detail.document_image == '' || karigar_detail.document_no == '' " (click)="f.form.valid && submit()">{{'Yes' | translate}}</button>
+                    <!-- (click)="f.form.valid && submit()" -->
+                    <button class="fill-btn" [disabled]="!data.check ||!data.otp ||!otp_value || data.payment_type == '' || karigar_detail.document_image == '' || karigar_detail.document_no == '' " (click)="submit()">{{'Yes' | translate}}</button>
                 </div>
             </form>
         </div>

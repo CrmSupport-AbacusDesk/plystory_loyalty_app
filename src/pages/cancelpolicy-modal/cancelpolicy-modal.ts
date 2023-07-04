@@ -100,19 +100,45 @@ export class CancelpolicyModalPage {
     submit()
     {
         
-        this.presentLoading();
         console.log('data');
         console.log(this.data);
         
         if(this.karigar_detail.user_type == 2){
             this.data.payment_type= "Gift";
         }
+        if(this.data.payment_type == 'Paytm' || this.data.payment_type == 'PhonePe' || this.data.payment_type == 'Google Pay'){
+            if(!this.data.payment_number ){
+                this.showAlert("Payment number are required");
+                    return;
+            }
+        }
+
+        if(this.data.payment_type == 'Bank Transfer'){
+            if(!this.data.account_holder_name && !this.data.bank_name && !this.data.account_no && !this.data.ifsc_code){
+                this.showAlert("Bank details are required");
+                return;
+            }
+        }
+        
+         if(this.data.payment_type == 'Bank Transfer'){
+            this.data.payment_number ='';
+            // return;
+        }
+        else{
+            this.data.account_holder_name = '';
+            this.data.bank_name = '';
+            this.data.account_no = '';
+            this.data.ifsc_code ='';
+        }
+        
         this.data.karigar_id = this.service.karigar_id,
         this.data.gift_id = this.gift_id,
         this.data.redeem_type = this.redeemType
         this.data.redeem_amount=  this.redeemPoint
         this.data.offer_id = this.gift_detail.offer_id,
         console.log('data');
+        this.presentLoading();
+
         this.service.post_rqst( {'data':this.data},'app_karigar/redeemRequest')
         .subscribe( (r) =>
         {
@@ -142,20 +168,21 @@ export class CancelpolicyModalPage {
             title:'Alert!',
             cssClass:'action-close',
             subTitle: text,
-            buttons: [{
-                text: 'Cancel',
-                role: 'cancel',
-                handler: () => {
-                    console.log('Cancel clicked');
-                }
-            },
-            {
-                text:'OK',
-                cssClass: 'close-action-sheet',
-                handler:()=>{
-                    this.navCtrl.push(TransactionPage);
-                }
-            }]
+            buttons : ['OK']
+            // buttons: [{
+            //     text: 'Cancel',
+            //     role: 'cancel',
+            //     handler: () => {
+            //         console.log('Cancel clicked');
+            //     }
+            // },
+            // {
+            //     text:'OK',
+            //     cssClass: 'close-action-sheet',
+            //     handler:()=>{
+            //         this.navCtrl.push(TransactionPage);
+            //     }
+            // }]
         });
         alert.present();
     }

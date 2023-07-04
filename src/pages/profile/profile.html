@@ -98,7 +98,7 @@
                                     <img src="{{upload_url + karigar_detail.document_image}}" (click)="viewDoc()">
                                 </div>
                             </div>
-                            <div class="text-box" *ngIf="karigar_detail.document_type == 'AadharCard'">
+                            <div class="text-box" *ngIf="karigar_detail.document_type == 'AadhaarCard'">
                                 <div class="doc-box">
                                     <img src="{{upload_url + karigar_detail.document_image_back}}" (click)="viewDoc()">
                                 </div>
@@ -114,6 +114,30 @@
                         </div>
                     </div>
                     
+                    <div class="profile-card" >
+                        <div class="text-center">
+                            <h2>{{ 'Bank Information' | translate }}</h2>
+                        </div>
+                        <div class="text-box">
+                            <p>{{'Account Holder Name' | translate}}</p>
+                            <h6>{{karigar_detail.account_holder_name ? karigar_detail.account_holder_name:'N/A'}}</h6>
+                        </div>
+                        <div class="text-box">
+                            <p>{{'Bank Name' | translate}}</p>
+                            <h6>{{ karigar_detail.bank_name ? karigar_detail.bank_name:'N/A'}} </h6>
+                        </div>
+                        <div class="text-box">
+                            <p>{{'Account No.' | translate}}</p>
+                            <h6>{{karigar_detail.account_no ? karigar_detail.account_no:'N/A'}}</h6>
+                        </div>
+                        <div class="text-box">
+                            <p>{{'IFSC Code' | translate}}</p>
+                            <h6>{{karigar_detail.ifsc_code ? karigar_detail.ifsc_code:'N/A'}}</h6>
+                        </div>
+                   
+                    </div>
+
+
                     <div class="profile-card">
                         <div class="text-center">
                             <h2>{{ 'Referral Code Information' | translate }}</h2>
