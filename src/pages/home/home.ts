@@ -417,6 +417,11 @@ long:any;
     goOnfaqPage() {
         this.navCtrl.push(FaqPage);
     }
+
+
+   
+
+
     goOnAdvanceTextPage() {
         this.navCtrl.push(AdvanceTextPage);
     }

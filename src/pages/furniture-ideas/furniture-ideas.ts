@@ -15,12 +15,14 @@ import { Storage } from '@ionic/storage';
 })
 export class FurnitureIdeasPage {
     
-    upload_url:any='';
+    upload_url2:any='';
     loading:Loading;
     tokenInfo:any={};
     lang:any='';
     filter:any={};
     flag:any='';
+
+    image : any = [];
     
     constructor(public navCtrl: NavController, public navParams: NavParams,public db:DbserviceProvider,public loadingCtrl:LoadingController,public translate:TranslateService,public constn:ConstantProvider,public storage:Storage) {
         this.presentLoading();
@@ -30,8 +32,9 @@ export class FurnitureIdeasPage {
     {
         this.get_user_lang();
         console.log('ionViewDidLoad FurnitureIdeasPage');
-        this.upload_url = this.constn.upload_url;
+        this.upload_url2 = this.constn.upload_url2;
         this.get_category();
+        this.get_funiture_img();
     }
     
     goOnfurnituredetailPage(data)
@@ -111,5 +114,43 @@ export class FurnitureIdeasPage {
         catch(Error){
             return null;
         }
+    }
+
+
+
+
+    get_funiture_img()
+    {
+        this.filter.limit = 0;
+        this.db.post_rqst({'filter' : this.filter},"app_master/getpic")
+        .subscribe(resp=>{
+            console.log(resp);
+            this.image = resp['image'];
+            this.loading.dismiss();
+        })
+    }
+
+
+    loadData1(infiniteScroll)
+    {
+        console.log('loading');
+        this.filter.limit=this.image.length;
+        this.db.post_rqst({'filter' : this.filter},'app_karigar/get_furniture_cat')
+        .subscribe( (r) =>
+        {
+            console.log(r);
+            if(r['image']=='')
+            {
+                this.flag=1;
+            }
+            else
+            {
+                setTimeout(()=>{
+                    this.image=this.image.concat(r['image']);
+                    console.log('Asyn operation has stop')
+                    infiniteScroll.complete();
+                },1000);
+            }
+        });
     }
 }
