@@ -17,6 +17,8 @@ export class GiftListPage {
     id:any='';
     gift_list:any=[];
     balance_point:any='';
+    redeem_balance:any='';
+
     loading:Loading;
     mode:any='';
     tokenInfo:any={};
@@ -108,6 +110,9 @@ export class GiftListPage {
             this.loading.dismiss();
             this.gift_list=r['gift'];
             this.balance_point=parseInt(r['karigar'].balance_point);
+
+            this.redeem_balance=parseInt(r['karigar'].redeem_balance);
+
             this.total_balance_point = parseInt( r['karigar'].balance_point) + parseInt(r['karigar'].referal_point_balance );
             
             var referral_per = r['referral_point_per'].one_time_percentage;

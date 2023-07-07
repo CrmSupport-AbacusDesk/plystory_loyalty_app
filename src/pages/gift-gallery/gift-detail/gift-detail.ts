@@ -26,6 +26,10 @@ export class GiftDetailPage {
     tokenInfo:any={};
     lang:any='';
     uploadUrl:any='';
+    redeem_balance:any='';
+
+
+
     constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public service:DbserviceProvider,public loadingCtrl:LoadingController,private app: App,public storage:Storage,public translate:TranslateService,public db:DbserviceProvider,public constant:ConstantProvider,public toastCtrl:ToastController) {
         this.uploadUrl = this.constant.upload_url
 
@@ -101,6 +105,8 @@ export class GiftDetailPage {
             var referral_amount = ((r['karigar'].referal_point_balance * referal_point_per)/100);
             
             this.offer_balance= parseInt(r['karigar'].balance_point) + (referral_amount);
+
+            this.redeem_balance=parseInt(r['karigar'].redeem_balance);
             
             console.log(this.offer_balance);
             console.log(this.gift_detail.coupon_points);
